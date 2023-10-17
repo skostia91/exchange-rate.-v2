@@ -18,7 +18,7 @@ public class Currencie {
 
     private String code;
 
-    @Column(name = "fullName")
+    @Column(name = "fullname")
     private String name;
 
     private String sign;
