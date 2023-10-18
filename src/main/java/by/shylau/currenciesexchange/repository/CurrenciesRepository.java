@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CurrenciesRepository extends JpaRepository<Currencie, Integer> {
-
+    Currencie findByCode(String name);
 }

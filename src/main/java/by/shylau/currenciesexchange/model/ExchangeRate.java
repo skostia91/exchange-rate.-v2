@@ -1,6 +1,8 @@
 package by.shylau.currenciesexchange.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 @Getter
@@ -21,5 +23,6 @@ public class ExchangeRate {
     @Column(name = "target_currency_id")
     private int targetCurrencyId;
 
+    @Positive
     private Double rate;
 }
