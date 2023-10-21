@@ -39,4 +39,14 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
                 .build(),
                 HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(InternalServerException.class)
+    protected ResponseEntity<ErrorMessage> handleInternalServerException(RuntimeException ex) {
+
+        return new ResponseEntity<>(ErrorMessage.builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .build(),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

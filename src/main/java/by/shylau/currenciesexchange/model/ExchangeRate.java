@@ -1,9 +1,10 @@
 package by.shylau.currenciesexchange.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -23,6 +24,11 @@ public class ExchangeRate {
     @Column(name = "target_currency_id")
     private int targetCurrencyId;
 
-    @Positive
-    private Double rate;
+    private double rate;
+
+    public ExchangeRate(int baseCurrencyId, int targetCurrencyId, double rate) {
+        this.baseCurrencyId = baseCurrencyId;
+        this.targetCurrencyId = targetCurrencyId;
+        this.rate = rate;
+    }
 }

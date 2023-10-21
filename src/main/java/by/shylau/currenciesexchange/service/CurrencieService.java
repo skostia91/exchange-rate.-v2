@@ -1,10 +1,12 @@
 package by.shylau.currenciesexchange.service;
 
-import by.shylau.currenciesexchange.exception.NotFoundException;
+import by.shylau.currenciesexchange.exception.BadRequestException;
+import by.shylau.currenciesexchange.exception.ConflictException;
 import by.shylau.currenciesexchange.model.Currencie;
 import by.shylau.currenciesexchange.repository.CurrenciesRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,10 +31,12 @@ public class CurrencieService {
 
     @Transactional()
     public Currencie addCurrencies(Currencie currencie) {
-        System.err.println("444");
-        currenciesRepository.save(currencie);
-        System.err.println("5555");
-        return findById(findAll().size());
+        try {
+            currenciesRepository.save(currencie);
+            return findById(findAll().size());
+        } catch (RuntimeException e) {
+            throw new ConflictException("валюта с таким именем уже существует");
+        }
     }
 
     public Currencie findById(int id) {
@@ -44,5 +48,4 @@ public class CurrencieService {
         }
         return currencie;
     }
-
 }
