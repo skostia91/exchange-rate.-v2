@@ -1,13 +1,9 @@
 package by.shylau.currenciesexchange.service;
 
-import by.shylau.currenciesexchange.exception.BadRequestException;
-import by.shylau.currenciesexchange.exception.ConflictException;
-import by.shylau.currenciesexchange.exception.InternalServerException;
 import by.shylau.currenciesexchange.model.Currencie;
 import by.shylau.currenciesexchange.repository.CurrenciesRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

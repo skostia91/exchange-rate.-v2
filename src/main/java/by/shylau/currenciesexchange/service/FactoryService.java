@@ -111,6 +111,7 @@ public class FactoryService {
                         convertTargetId(to + from)).getRate();
                 answer = roundDoubles(rate * amountDouble);
             } else {
+
                 try {
                     double usdFromRate = exchangeRateService.getExchangeRate(convertBaseId(base + from),
                             convertTargetId(base + from)).getRate();

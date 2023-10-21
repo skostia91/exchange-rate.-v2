@@ -8,19 +8,11 @@ import by.shylau.currenciesexchange.exception.NotFoundException;
 import by.shylau.currenciesexchange.model.Currencie;
 import by.shylau.currenciesexchange.service.CurrencieService;
 import by.shylau.currenciesexchange.service.FactoryService;
-import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ServerErrorException;
-//import org.springframework.data.relational.core.conversion.DbActionExecutionException;
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.net.ConnectException;
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -57,7 +49,6 @@ public class CurrencyController {
             throw new InternalServerException("не удаётся подключиться к бд");
         }
     }
-
 
     @PostMapping("/currencies")
     public ResponseEntity<Currencie> addCurrencies(CurrencyDTOResponce currencieDTO) {

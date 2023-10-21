@@ -1,14 +1,11 @@
 package by.shylau.currenciesexchange.service;
 
 import by.shylau.currenciesexchange.exception.ConflictException;
-import by.shylau.currenciesexchange.exception.NotFoundException;
 import by.shylau.currenciesexchange.model.ExchangeRate;
 import by.shylau.currenciesexchange.repository.ExchangeRateRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExchangeRateService {
@@ -26,7 +23,6 @@ public class ExchangeRateService {
         return exchangeRateRepository.findByBaseCurrencyIdAndAndTargetCurrencyId(base, target);
     }
 
-    @Transactional
     public void add(ExchangeRate exchangeRate) {
         try {
             exchangeRateRepository.save(exchangeRate);
@@ -34,7 +30,4 @@ public class ExchangeRateService {
             throw new ConflictException("валютная пара с таким кодом уже существует");
         }
     }
-
-
-
 }
