@@ -61,16 +61,16 @@ public class CurrencyController {
 
     @PostMapping("/currencies")
     public ResponseEntity<Currencie> addCurrencies(CurrencyDTOResponce currencieDTO) {
-
         if (currencieDTO.getCode().isEmpty() || currencieDTO.getName().isEmpty() ||
                 currencieDTO.getSign().isEmpty()) {
             throw new BadRequestException("отсутствует нужное поле формы");
         }
         try {
-            currenciesService.addCurrencies(factoryService.convertCurrencyDTOResponceToCurrency(currencieDTO));
-            return new ResponseEntity<>(currenciesService.findAll().get(currenciesService.findAll().size() - 1),
+            return new ResponseEntity<>(currenciesService.addCurrencies(factoryService.convertCurrencyDTOResponceToCurrency(currencieDTO)),
                     HttpStatus.OK);
-        } catch (DataAccessException e) {//не работает
+        } catch (DataAccessException e) {
+            throw new ConflictException("валюта с таким именем уже существует");
+        } catch (RuntimeException e) {
             throw new InternalServerException("не удаётся подключиться к бд");
         }
     }

@@ -2,6 +2,7 @@ package by.shylau.currenciesexchange.service;
 
 import by.shylau.currenciesexchange.exception.BadRequestException;
 import by.shylau.currenciesexchange.exception.ConflictException;
+import by.shylau.currenciesexchange.exception.InternalServerException;
 import by.shylau.currenciesexchange.model.Currencie;
 import by.shylau.currenciesexchange.repository.CurrenciesRepository;
 import jakarta.transaction.Transactional;
@@ -30,13 +31,9 @@ public class CurrencieService {
     }
 
     @Transactional()
-    public Currencie addCurrencies(Currencie currencie) {
-        try {
-            currenciesRepository.save(currencie);
-            return findById(findAll().size());
-        } catch (RuntimeException e) {
-            throw new ConflictException("валюта с таким именем уже существует");
-        }
+    public Currencie addCurrencies(Currencie currencie) throws RuntimeException {
+        currenciesRepository.save(currencie);
+        return findById(findAll().size() - 1);
     }
 
     public Currencie findById(int id) {
