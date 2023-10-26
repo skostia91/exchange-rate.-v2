@@ -23,9 +23,9 @@ public class ExchangeRateService {
         return exchangeRateRepository.findByBaseCurrencyIdAndAndTargetCurrencyId(base, target);
     }
 
-    public void add(ExchangeRate exchangeRate) {
+    public ExchangeRate add(ExchangeRate exchangeRate) {
         try {
-            exchangeRateRepository.save(exchangeRate);
+            return exchangeRateRepository.save(exchangeRate);
         } catch (RuntimeException e) {
             throw new ConflictException("валютная пара с таким кодом уже существует");
         }

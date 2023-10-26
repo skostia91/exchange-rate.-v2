@@ -1,7 +1,6 @@
 package by.shylau.currenciesexchange.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -9,9 +8,9 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "currencies")
+@Table(name = "currency")
 @ToString
-public class Currencie {
+public class Currency {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

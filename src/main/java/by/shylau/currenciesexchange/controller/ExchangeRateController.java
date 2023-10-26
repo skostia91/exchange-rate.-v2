@@ -5,7 +5,7 @@ import by.shylau.currenciesexchange.dto.ExchangeRateDTORequest;
 import by.shylau.currenciesexchange.dto.ExchangeRateDTOResponce;
 import by.shylau.currenciesexchange.exception.BadRequestException;
 import by.shylau.currenciesexchange.exception.InternalServerException;
-import by.shylau.currenciesexchange.service.CurrencieService;
+import by.shylau.currenciesexchange.service.CurrencyService;
 import by.shylau.currenciesexchange.service.ExchangeRateService;
 import by.shylau.currenciesexchange.service.FactoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class ExchangeRateController {
     private final FactoryService factoryService;
 
     @Autowired
-    public ExchangeRateController(ExchangeRateService exchangeRateService, FactoryService factoryService, CurrencieService currencieService) {
+    public ExchangeRateController(ExchangeRateService exchangeRateService, FactoryService factoryService, CurrencyService currencyService) {
         this.exchangeRateService = exchangeRateService;
         this.factoryService = factoryService;
     }

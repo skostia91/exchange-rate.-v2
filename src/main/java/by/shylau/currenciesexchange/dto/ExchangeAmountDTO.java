@@ -1,6 +1,6 @@
 package by.shylau.currenciesexchange.dto;
 
-import by.shylau.currenciesexchange.model.Currencie;
+import by.shylau.currenciesexchange.model.Currency;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExchangeAmountDTO {
-    private Currencie base;
-    private Currencie target;
+    private Currency base;
+    private Currency target;
     private BigDecimal rate;
     private String amount;
     private double convertedAmount;

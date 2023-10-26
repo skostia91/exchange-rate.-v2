@@ -6,7 +6,7 @@ import by.shylau.currenciesexchange.dto.ExchangeRateDTORequest;
 import by.shylau.currenciesexchange.dto.ExchangeRateDTOResponce;
 import by.shylau.currenciesexchange.exception.BadRequestException;
 import by.shylau.currenciesexchange.exception.NotFoundException;
-import by.shylau.currenciesexchange.model.Currencie;
+import by.shylau.currenciesexchange.model.Currency;
 import by.shylau.currenciesexchange.model.ExchangeRate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +19,19 @@ import java.util.List;
 
 @Service
 public class FactoryService {
-    private final CurrencieService currencieService;
+    private final CurrencyService currencyService;
     private final ExchangeRateService exchangeRateService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public FactoryService(CurrencieService currencieService, ExchangeRateService exchangeRateService, ModelMapper modelMapper) {
-        this.currencieService = currencieService;
+    public FactoryService(CurrencyService currencyService, ExchangeRateService exchangeRateService, ModelMapper modelMapper) {
+        this.currencyService = currencyService;
         this.exchangeRateService = exchangeRateService;
         this.modelMapper = modelMapper;
     }
 
-    public Currencie convertCurrencyDTOResponceToCurrency(CurrencyDTOResponce currencyDTOResponce) {
-        return modelMapper.map(currencyDTOResponce, Currencie.class);
+    public Currency convertCurrencyDTOResponceToCurrency(CurrencyDTOResponce currencyDTOResponce) {
+        return modelMapper.map(currencyDTOResponce, Currency.class);
     }
 
     public List<ExchangeRateDTORequest> getExchangeRateDTORequest(List<ExchangeRate> exchangeRateList) {
@@ -46,18 +46,18 @@ public class FactoryService {
     public ExchangeRateDTORequest converterExchangeRateIntoExchangeRateDTO(ExchangeRate exchangeRate) {
         return new ExchangeRateDTORequest(
                 exchangeRate.getId(),
-                currencieService.findById(exchangeRate.getBaseCurrencyId()),
-                currencieService.findById(exchangeRate.getTargetCurrencyId()),
+                currencyService.findById(exchangeRate.getBaseCurrencyId()),
+                currencyService.findById(exchangeRate.getTargetCurrencyId()),
                 exchangeRate.getRate()
         );
     }
 
     public int convertBaseId(String code) {
         String baseCurrency = getConvertStringBaseCode(code);
-        if (currencieService.findByCode(baseCurrency) == null) {
+        if (currencyService.findByCode(baseCurrency) == null) {
             throw new NotFoundException("не найден обменный курс " + code);
         }
-        return currencieService.findByCode(baseCurrency).getId();
+        return currencyService.findByCode(baseCurrency).getId();
     }
 
     public String getConvertStringBaseCode(String line) {
@@ -70,10 +70,10 @@ public class FactoryService {
     public int convertTargetId(String code) {
         String targetCurrency = getConvertStringTargetCode(code);
 
-        if (currencieService.findByCode(targetCurrency) == null) {
+        if (currencyService.findByCode(targetCurrency) == null) {
             throw new NotFoundException("не найден обменный курс " + code);
         }
-        return currencieService.findByCode(targetCurrency).getId();
+        return currencyService.findByCode(targetCurrency).getId();
     }
 
     public String getConvertStringTargetCode(String line) {
@@ -85,8 +85,8 @@ public class FactoryService {
 
     public ExchangeRate convertExchangeDTOIntoExchange(ExchangeRateDTOResponce exchangeRateDTOResponce) {
 
-        int base = currencieService.findByCode(exchangeRateDTOResponce.getBaseCurrencyCode()).getId();
-        int target = currencieService.findByCode(exchangeRateDTOResponce.getTargetCurrencyCode()).getId();
+        int base = currencyService.findByCode(exchangeRateDTOResponce.getBaseCurrencyCode()).getId();
+        int target = currencyService.findByCode(exchangeRateDTOResponce.getTargetCurrencyCode()).getId();
         return new ExchangeRate(base, target, exchangeRateDTOResponce.getRate());
     }
 
@@ -126,8 +126,8 @@ public class FactoryService {
         }
 
         return new ExchangeAmountDTO(
-                currencieService.findByCode(from),
-                currencieService.findByCode(to),
+                currencyService.findByCode(from),
+                currencyService.findByCode(to),
                 new BigDecimal(Double.toString(rate)).setScale(2, RoundingMode.HALF_DOWN),
                 amount,
                 answer);

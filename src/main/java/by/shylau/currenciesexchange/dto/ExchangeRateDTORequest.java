@@ -1,6 +1,6 @@
 package by.shylau.currenciesexchange.dto;
 
-import by.shylau.currenciesexchange.model.Currencie;
+import by.shylau.currenciesexchange.model.Currency;
 import lombok.*;
 
 @Getter
@@ -11,18 +11,18 @@ import lombok.*;
 public class ExchangeRateDTORequest {
     private int id;
 
-    private Currencie baseCurrencyId;
+    private Currency baseCurrencyId;
 
-    private Currencie targetCurrencyId;
+    private Currency targetCurrencyId;
 
     private Double rate;
 
-    public ExchangeRateDTORequest(Currencie baseCurrencyId, Currencie targetCurrencyId) {
+    public ExchangeRateDTORequest(Currency baseCurrencyId, Currency targetCurrencyId) {
         this.baseCurrencyId = baseCurrencyId;
         this.targetCurrencyId = targetCurrencyId;
     }
 
-    public ExchangeRateDTORequest(Currencie baseCurrencyId, Currencie targetCurrencyId, Double rate) {
+    public ExchangeRateDTORequest(Currency baseCurrencyId, Currency targetCurrencyId, Double rate) {
         this.baseCurrencyId = baseCurrencyId;
         this.targetCurrencyId = targetCurrencyId;
         this.rate = rate;
